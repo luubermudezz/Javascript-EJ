@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reclamos para Uber</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <style>
+    /* Personaliza estilos adicionales aquí si es necesario */
+  </style>
+</head>
+<body>
+  <header class="bg-dark text-white py-4">
+    <div class="container">
+      <h1 class="text-center">Reclamos para Uber</h1>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <section id="objetivo" class="mb-5">
+      <h2>Objetivo de la Web</h2>
+      <p>Esta página está destinada a recibir reclamos y comentarios de los usuarios de Uber para mejorar nuestros servicios.</p>
+    </section>
+
+    <section id="formulario-contacto">
+      <h2>Formulario de Contacto</h2>
+      <form id="formulario">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" id="fecha-nacimiento" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </section>
+
+    <section id="mensaje-bienvenida" class="mt-5">
+      <h2>Mensaje de Bienvenida</h2>
+      <div id="mensaje"></div>
+    </section>
+
+    <section id="dias-vividos" class="mt-5">
+      <h2>Días Vividos</h2>
+      <div id="dias"></div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-3">
+    <div class="container text-center">
+      <p>&copy; 2024 Reclamos para Uber. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+
+    function obtenerMensajeBienvenida(nombre) {
+      var index = Math.floor(Math.random() * nombres.length);
+      return `¡Hola ${nombre}! Bienvenido/a a la página de reclamos para Uber.`;
+    }
+
+    function calcularDiasVividos(fechaNacimiento) {
+      var fechaNacimiento = new Date(fechaNacimiento);
+      var fechaActual = new Date();
+      var diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
+      var diasVividos = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      return diasVividos;
+    }
+
+    $(document).ready(function() {
+      $('#formulario').submit(function(event) {
+        event.preventDefault();
+
+        var nombre = $('#nombre').val();
+        var fechaNacimiento = $('#fecha-nacimiento').val();
+
+        var mensajeBienvenida = obtenerMensajeBienvenida(nombre);
+        $('#mensaje').text(mensajeBienvenida);
+
+        var diasVividos = calcularDiasVividos(fechaNacimiento);
+        $('#dias').text(`¡Has vivido ${diasVividos} días desde tu nacimiento!`);
+
+        $('#nombre').val('');
+        $('#fecha-nacimiento').val('');
+      });
+    });
+  </script>
+
+</body>
+</html>
